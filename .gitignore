@@ -1,0 +1,17 @@
+# Compiled binaries
+*.exe
+*.out
+ExpenseTrack
+
+# Object files
+*.o
+*.obj
+
+# macOS metadata
+.DS_Store
+
+# IDE/editor folders
+.vscode/
+.idea/
+*.swp
+*~
