@@ -67,22 +67,173 @@ struct AnnualData
 // of the linked-list data.  Implement it here.
 // ============================================================
 
-// [Member 2 code will be inserted here]
 
-// Temporary stub so Member 3 compiles and tests independently.
-// Member 2 will REPLACE this stub with the real implementation.
-int copyExpensesToArray(const Node* head, Expense arr[], int capacity)
+// ============================================================
+// SECTION 2 – MEMBER 2: EXPENSE RECORD MANAGEMENT
+// Data Structure: Singly Linked List
+// ============================================================
+
+// Check whether an expense ID already exists.
+bool expenseIdExists(const Node* head, int id)
 {
+    const Node* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->data.id == id)
+            return true;
+
+        current = current->next;
+    }
+
+    return false;
+}
+
+// Insert a new expense at the end.
+bool addExpense(Node*& head, int id,
+                const string& category, double amount)
+{
+    if (id <= 0 || category.empty() || amount < 0 ||
+        expenseIdExists(head, id))
+        return false;
+
+    Node* newNode = new Node;
+    newNode->data.id = id;
+    newNode->data.category = category;
+    newNode->data.amount = amount;
+    newNode->next = nullptr;
+
+    if (head == nullptr)
+    {
+        head = newNode;
+        return true;
+    }
+
+    Node* current = head;
+
+    while (current->next != nullptr)
+        current = current->next;
+
+    current->next = newNode;
+    return true;
+}
+
+// Delete an expense using its ID.
+bool deleteExpense(Node*& head, int id)
+{
+    if (head == nullptr)
+        return false;
+
+    if (head->data.id == id)
+    {
+        Node* toDelete = head;
+        head = head->next;
+        delete toDelete;
+        return true;
+    }
+
+    Node* current = head;
+
+    while (current->next != nullptr &&
+           current->next->data.id != id)
+        current = current->next;
+
+    if (current->next == nullptr)
+        return false;
+
+    Node* toDelete = current->next;
+    current->next = toDelete->next;
+    delete toDelete;
+
+    return true;
+}
+
+// Update an existing expense.
+bool updateExpense(Node* head, int id,
+                   const string& newCategory,
+                   double newAmount)
+{
+    if (newCategory.empty() || newAmount < 0)
+        return false;
+
+    Node* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->data.id == id)
+        {
+            current->data.category = newCategory;
+            current->data.amount = newAmount;
+            return true;
+        }
+
+        current = current->next;
+    }
+
+    return false;
+}
+
+// Display all expenses.
+void displayExpenses(const Node* head)
+{
+    if (head == nullptr)
+    {
+        cout << "No expense records found.\n";
+        return;
+    }
+
+    cout << "\n---------- EXPENSE RECORDS ----------\n";
+    cout << "ID\tCategory\tAmount\n";
+
+    const Node* current = head;
+
+    while (current != nullptr)
+    {
+        cout << current->data.id << "\t"
+             << current->data.category << "\t\t"
+             << current->data.amount << '\n';
+
+        current = current->next;
+    }
+
+    cout << "-------------------------------------\n";
+}
+
+// Copy linked-list records into an array for Member 3.
+int copyExpensesToArray(const Node* head,
+                        Expense arr[], int capacity)
+{
+    if (arr == nullptr || capacity <= 0)
+        return 0;
+
     int count = 0;
     const Node* current = head;
+
     while (current != nullptr && count < capacity)
     {
         arr[count] = current->data;
         count++;
         current = current->next;
     }
+
     return count;
 }
+
+// Free all dynamically allocated nodes.
+void clearExpenses(Node*& head)
+{
+    while (head != nullptr)
+    {
+        Node* toDelete = head;
+        head = head->next;
+        delete toDelete;
+    }
+}
+
+// ============================================================
+// END OF MEMBER 2 SECTION
+// ============================================================
+
 
 // ============================================================
 // END OF SECTION 2
