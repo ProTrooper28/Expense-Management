@@ -1,0 +1,92 @@
+# Member 2 – Expense Record Management
+
+## 1. Module Overview
+
+This module is responsible for managing expense records in the Annual Expense and Net Savings Management System.
+
+It uses a **Singly Linked List** to store and manage expense information dynamically.
+
+Each expense record contains:
+- Expense ID
+- Expense Category
+- Expense Amount
+
+## 2. Data Structure Used
+
+**Singly Linked List**
+
+Each node contains:
+- Expense data
+- Pointer to the next node
+
+The linked list allows dynamic insertion and deletion of expense records.
+
+## 3. Functions Implemented
+
+| Function | Description |
+|---|---|
+| `expenseIdExists()` | Checks whether an expense ID already exists. |
+| `addExpense()` | Inserts a new expense at the end of the linked list. |
+| `deleteExpense()` | Deletes an expense using its ID. |
+| `updateExpense()` | Updates the category and amount of an expense. |
+| `displayExpenses()` | Displays all stored expense records. |
+| `copyExpensesToArray()` | Copies linked-list records into an array for Member 3. |
+| `clearExpenses()` | Deletes all nodes and frees allocated memory. |
+
+## 4. Algorithms Used
+
+### Insertion
+1. Check whether the ID is valid and unique.
+2. Create a new node.
+3. Store expense details.
+4. Traverse to the last node.
+5. Link the new node at the end.
+
+### Deletion
+1. Search for the expense ID.
+2. If found at the head, update the head pointer.
+3. Otherwise, locate the previous node.
+4. Adjust links and delete the required node.
+
+### Updating
+1. Search for the given expense ID.
+2. If found, update its category and amount.
+3. Return success or failure.
+
+### Display
+1. Start from the head node.
+2. Traverse the linked list.
+3. Display ID, category and amount of each node.
+
+## 5. Time Complexity
+
+| Operation | Time Complexity |
+|---|---|
+| Check ID | O(n) |
+| Insert at end | O(n) |
+| Delete by ID | O(n) |
+| Update by ID | O(n) |
+| Display records | O(n) |
+| Copy to array | O(n) |
+
+Here, n represents the number of expense records.
+
+## 6. Technologies Used
+
+- Programming Language: C++
+- IDE: Visual Studio Code
+- Data Structure: Singly Linked List
+- Version Control: Git and GitHub
+
+## 7. Integration with Other Members
+
+- Member 1 manages income and category information.
+- Member 2 manages expense records using a singly linked list.
+- Member 3 performs searching and sorting using an array copy of expense records.
+- Member 4 manages undo operations and annual reports using a stack.
+
+The `copyExpensesToArray()` function provides the interface required by Member 3.
+
+## 8. Conclusion
+
+The Member 2 module provides dynamic expense record management through a singly linked list. It supports insertion, deletion, updating, displaying and transferring expense records to an array for further processing.
